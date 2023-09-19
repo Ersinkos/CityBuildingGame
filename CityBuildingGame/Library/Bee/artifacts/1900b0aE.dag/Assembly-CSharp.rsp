@@ -352,6 +352,7 @@
 "Assets/Scripts/BuildingPreset.cs"
 "Assets/Scripts/CameraController.cs"
 "Assets/Scripts/City.cs"
+"Assets/Scripts/RotateIndicator.cs"
 "Assets/Scripts/Selector.cs"
 -langversion:9.0
 

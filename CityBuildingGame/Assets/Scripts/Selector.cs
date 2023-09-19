@@ -6,10 +6,10 @@ using UnityEngine.EventSystems;
 public class Selector : MonoBehaviour
 {
     private Camera cam;
-    public static Selector Instance;
+    public static Selector instance;
     private void Awake()
     {
-        Instance = this;
+        instance = this;
     }
     private void Start()
     {
