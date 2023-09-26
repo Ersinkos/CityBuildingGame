@@ -6,7 +6,6 @@ public class BuildingPlacement : MonoBehaviour
 {
     private bool currentlyPlaced;
     private bool currentlyDestroyed; //with bulldozer
-
     private BuildingPreset currentBuildingPreset;
 
     private float indicatorUpdateTime = 0.05f;
@@ -15,7 +14,8 @@ public class BuildingPlacement : MonoBehaviour
 
     public GameObject placementIndicator;
     public GameObject bulldozerIndicator;
-
+    public LayerMask road;
+    public bool isRoad = false;
     public void BeginNewBuildingPlacement(BuildingPreset preset)
     {
         //if(City.instance.money<preset.cost)
@@ -41,6 +41,7 @@ public class BuildingPlacement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             CancelBuildingPlacement();
+            isRoad = false;
         }
         if (Time.time - lastUpdateTime > indicatorUpdateTime)
         {
@@ -55,7 +56,7 @@ public class BuildingPlacement : MonoBehaviour
                 bulldozerIndicator.transform.position = currentIndicatorPos;
             }
         }
-        if (Input.GetMouseButtonDown(0) && currentlyPlaced)
+        if (Input.GetMouseButtonDown(0) && currentlyPlaced && RoadCheck())
         {
             PlaceBuilding();
         }
@@ -76,18 +77,25 @@ public class BuildingPlacement : MonoBehaviour
         placementIndicator.transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
         placementIndicator.transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
         placementIndicator.transform.GetChild(0).GetChild(2).gameObject.SetActive(false);
+        isRoad = false;
     }
     public void FactoryChosed()
     {
         placementIndicator.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
         placementIndicator.transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
         placementIndicator.transform.GetChild(0).GetChild(2).gameObject.SetActive(false);
+        isRoad = false;
     }
     public void FarmChosed()
     {
         placementIndicator.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
         placementIndicator.transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
         placementIndicator.transform.GetChild(0).GetChild(2).gameObject.SetActive(true);
+        isRoad = false;
+    }
+    public void RoadChosed()
+    {
+        isRoad = true;
     }
     void DestroyBuilding()
     {
@@ -96,5 +104,10 @@ public class BuildingPlacement : MonoBehaviour
         {
             City.instance.OnRemoveBuilding(buildingToDestroy);
         }
+    }
+    public bool RoadCheck()
+    {
+        if (isRoad) return true;
+        else return Physics.CheckSphere(placementIndicator.transform.position, 1.0f, road);
     }
 }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1228104802088728891}
   - component: {fileID: 3398401057267679137}
   - component: {fileID: 5175992581653037812}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7767083252795971241}
   - component: {fileID: 8384980988083996525}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Building_Road
   m_TagString: Untagged
   m_Icon: {fileID: 0}
